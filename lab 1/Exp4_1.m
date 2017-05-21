@@ -1,0 +1,32 @@
+load('signal_lab1.mat')
+c = length(image2(1,:))
+r = length(image2)
+
+res = zeros(r,c);
+
+for i=1:r/2
+    for j = 1:c/2
+%         temp = 0;
+%         for k = 2*i-1 : 2*i
+%             for l = 2*j-1: 2*j
+%                 temp = temp+image2(k,l);
+%             end
+%         end
+%         temp = temp/4;
+%         
+        for k = 2*i-1 : 2*i
+            for l = 2*j-1: 2*j
+                res(k,l) = image2(2*i-1,2*j-1);
+            end
+        end
+        
+        
+    end
+end
+
+
+figure(1);
+image(res);
+figure(2);
+image(image2);
+

@@ -1,0 +1,113 @@
+close all;
+clear;
+load('data_lab7.mat')
+fileID = fopen('island1.txt','r');
+arr1=fscanf(fileID,'%f');
+fclose(fileID);
+fileID = fopen('island2.txt','r');
+arr2=fscanf(fileID,'%f');
+fclose(fileID);
+
+
+
+mean1=mean(arr1);
+mean2=mean(arr2);
+
+s1=std(arr1);
+s2=std(arr2);
+
+n1=size(arr1,1);
+n2=size(arr2,1);
+
+tval1=1.963;
+tval2=2.018;
+
+cimin1=mean1-(s1*tval1)/(n1^(0.5));
+cimin2=mean2-(s2*tval2)/(n2^(0.5));
+
+cimax1=mean1+(s1*tval1)/(n1^(0.5));
+cimax2=mean2+(s2*tval2)/(n2^(0.5));
+
+
+
+CI1 = [cimin1 cimax1];
+CI2 = [cimin2 cimax2];
+
+
+
+figure;
+plot([1 2],[CI1(1) CI1(1)],'lineWidth',2)
+hold on
+plot([1 2],[CI1(2) CI1(2)],'lineWidth',2)
+hold on
+plot([1.5 1.5], CI1,'lineWidth',2)
+hold on
+plot([3 4],[CI2(1) CI2(1)],'lineWidth',2)
+hold on
+plot([3 4],[CI2(2) CI2(2)],'lineWidth',2)
+hold on
+plot([3.5 3.5], CI2,'lineWidth',2)
+xlabel('data1                            data2')
+ylabel('confidence interval')
+title('confidence interval for two dataset')
+
+av1=[CI1 CI2];
+ylim([min(av1)-0.05 max(av1)+0.05])
+xlim([0 5])
+
+
+
+%% q1 part 2
+% we can take a sample size which is minimum of sample size from both of
+% them
+
+
+n=1000;
+flags=zeros(n,1);
+
+for i=1:n
+    sample1=arr1(randperm(size(arr1,1),size(arr2,1)));
+    
+    
+    
+    mean1=mean(sample1);
+    mean2=mean(arr2);
+
+    s1=std(sample1);
+    s2=std(arr2);
+
+    n1=size(sample1,1);
+    n2=size(arr2,1);
+
+    tval1=2.018;
+    tval2=2.018;
+
+    cimin1=mean1-(s1*tval1)/(n1^(0.5));
+    cimin2=mean2-(s2*tval2)/(n2^(0.5));
+
+    cimax1=mean1+(s1*tval1)/(n1^(0.5));
+    cimax2=mean2+(s2*tval2)/(n2^(0.5));
+
+
+
+    CI1 = [cimin1 cimax1];
+    CI2 = [cimin2 cimax2];
+    
+    if(min(CI1) > max(CI2) )
+        flags(i)=1;
+    end
+    if(min(CI2) > max(CI1) )
+        flags(i)=1;
+    end
+    
+
+    
+
+end
+
+(sum(flags)/n)*100
+
+
+
+
+

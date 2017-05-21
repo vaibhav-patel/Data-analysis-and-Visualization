@@ -1,0 +1,584 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>mymainvap</title><meta name="generator" content="MATLAB 9.0"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-01-24"><meta name="DC.source" content="mymainvap.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">Lab3 - 201401222 - 201401409</a></li><li><a href="#2">Problem 1(a)</a></li><li><a href="#7">Problem 1(B)</a></li><li><a href="#9">Problem 2</a></li><li><a href="#10">Problem 2(a)</a></li><li><a href="#13">Problem 2(a)</a></li><li><a href="#14">2.1.a</a></li><li><a href="#15">2.1.b</a></li><li><a href="#16">2.2</a></li></ul></div><h2>Lab3 - 201401222 - 201401409<a name="1"></a></h2><pre class="codeinput"><span class="comment">%%Problem 1</span>
+<span class="comment">% Load data_lab3.mat. ammonia_concentration provides the ammonia</span>
+<span class="comment">% concentration values (in mg/L) from a water treatment plant during a certain period.</span>
+</pre><h2>Problem 1(a)<a name="2"></a></h2><p>Suppose you are asked to assume that this data is normally distributed. How will you confirm/reject this assumption using boxplots, histograms and estimated data statistics (mean, standard deviation etc.). You should explicitly list the features/aspects that you considered in order to arrive at your answer.</p><p>Answer 1(a): After plotting boxplot, histogram and calculating mean and standard deviation, we've come to a conclusion that this data is approximately normally distributed. Further details are given below the figures.</p><pre class="codeinput">close <span class="string">all</span>;
+clear;
+load(<span class="string">'data_lab3.mat'</span>);
+
+dataset=ammonia_concentration;
+<span class="comment">% sorting the data for getting the values of Q1, Q2, Q3.</span>
+sorted=sort(dataset);
+len=size(sorted,1);
+Q1d1=sorted(floor(len*0.25))
+Q2d1=sorted(floor(len*0.50))
+Q3d1=sorted(floor(len*0.75))
+myboxplot1=[min(dataset) Q1d1 Q2d1 Q3d1 max(dataset)];
+
+draw_data=[myboxplot1*20];
+draw_data=draw_data';
+
+n = size(draw_data, 2);
+unit = (1-1/(1+n))/(1+9/(4)) ;
+figure;
+hold <span class="string">on</span>;
+<span class="keyword">for</span> i = 1:n
+    arr = draw_data(:,i);
+    plot([i-unit, i+unit], [arr(5), arr(5)], <span class="string">'LineWidth'</span>, 2);
+    plot([i-unit, i+unit], [arr(1), arr(1)], <span class="string">'LineWidth'</span>, 2);
+    plot([i-unit, i+unit], [arr(3), arr(3)], <span class="string">'LineWidth'</span>, 2);
+    plot([i, i], [arr(5), arr(4)], <span class="string">'LineWidth'</span>, 2);
+    plot([i, i], [arr(2), arr(1)], <span class="string">'LineWidth'</span>, 2);
+    plot([i-unit, i+unit, i+unit, i-unit, i-unit], [arr(2), arr(2), arr(4), arr(4), arr(2)], <span class="string">'LineWidth'</span>, 2);
+<span class="keyword">end</span>
+diff=max(max(draw_data))- min(min(draw_data));
+<span class="comment">%For representing the data nicely</span>
+ylim([min(min(draw_data))-(diff)/10  max(max(draw_data))+diff/10]);
+
+ylabel(<span class="string">'Values'</span>)
+
+title(<span class="string">'BoxPlot of the ammonia concentration'</span>)
+xlim([0 2.5])
+str=strcat(<span class="string">'Amm. con. Mean= '</span>,num2str(mean(dataset)));
+text(1.2,800,str)
+str=strcat(<span class="string">'Amm. con. Sigma= '</span>,num2str(std(dataset)));
+text(1.2,1000,str)
+</pre><pre class="codeoutput">
+Q1d1 =
+
+   30.2100
+
+
+Q2d1 =
+
+   36.1800
+
+
+Q3d1 =
+
+   42.3600
+
+</pre><img vspace="5" hspace="5" src="mymainvap_01.png" alt=""> <p>We can't say much from the boxplot. But if we have access to the boxplot only, we can say that the median is in the middle of the box. The data is not skewed. Maxima and minima are approximately at equal distance with the median. Just from the mean and standard deviation we can say that the standard deviation is small in comparision withe magnitude of the mean. So, the data is densely distributed. Again this can be wrong, depending on the data. The data can be normally distributed. But it is just a simple observation. It can be wrong. We can make more inferences once we plot the histogram of the data.</p><p>Histogram code</p><pre class="codeinput">data=ammonia_concentration;
+bins=50;
+histArr=zeros(1,bins);
+min1=min(min(data));
+max1=max(max(data));
+diff=(max1-min1)/bins;
+values=min1+diff/2:diff:max1-diff/2;
+<span class="keyword">for</span> i=1:size(data,1)
+    <span class="keyword">for</span> j=1:bins
+        <span class="keyword">if</span>(data(i,1)&gt;=min1+(j-1)*diff &amp; data(i,1) &lt; min1+j*diff)
+            histArr(j) =histArr(j) + 1;
+            <span class="keyword">break</span>;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+figure;
+bar(values,histArr);
+mu=mean(data);
+sigma=std(data);
+xlabel(<span class="string">'Data points'</span>);
+ylabel(<span class="string">'Frequency of the observers'</span>);
+str=strcat(<span class="string">'Histogram of the ammonia concentration   binsize=('</span>,int2str(bins),<span class="string">')'</span>);
+title(str);
+</pre><img vspace="5" hspace="5" src="mymainvap_02.png" alt=""> <p>After observing histogram, we can get more insight in the data. The data looks like it is normally distributed.</p><h2>Problem 1(B)<a name="7"></a></h2><p>Notwithstanding your answer in the previous part, assuming that the data is normally distributed, estimate the probability that ammonia concentration is greater than 40 mg/L in two cases: (a) using only the data provided (i.e.not computing any statistics from given data), (b) by using estimated statistics from the data. Does the answer in the two cases agree, yes or no? Provide reason(s) for your choice.</p><p>Answer:1(B) (a) : Using the data only we've got 0.34 probability (b) : Using the stastical normal distribution table we've got 0.33 probability. So, we can say that the data is indeed following normal distribution closely. We do not have normal cumulative function in the matlab, so we found the values of the probability using the normal distribution table.</p><pre class="codeinput">data=ammonia_concentration;
+gt_40=sum(data&gt;40);
+per_40_using_the_data_only=gt_40/size(data,1)
+
+<span class="comment">% referring from the normal distribution table table</span>
+(40-mu)/sigma
+1-0.67
+</pre><pre class="codeoutput">
+per_40_using_the_data_only =
+
+    0.3444
+
+
+ans =
+
+    0.4584
+
+
+ans =
+
+    0.3300
+
+</pre><h2>Problem 2<a name="9"></a></h2><pre class="codeinput"><span class="comment">%Load data_lab3.mat. score_natural_model is a 9968-deimensional vector</span>
+<span class="comment">% in which each element quantifies natural images. The goal of</span>
+<span class="comment">% this experiment is to use this data to model mathematically</span>
+<span class="comment">% the underlying probability distribution, and draw inferences from the resulting model.</span>
+</pre><h2>Problem 2(a)<a name="10"></a></h2><p>Assuming  that the data in &acirc;&#8364;&#732;score_natural_model&acirc;&#8364;&#8482;  is normally distributed, obtain the corresponding normal distribution curve.</p><pre class="codeinput">data=score_natural_model;
+
+mu2=mean(data)
+sigma2=std(data)
+histogram(data);
+xlabel(<span class="string">'score natural'</span>);
+ylabel(<span class="string">'frequency'</span>);
+title(<span class="string">'Histogram of score natural model'</span>);
+
+dd=sort(data);
+min1=min(min(data))
+max1=max(max(data))
+figure
+normal_curve=exp(-((dd-mu2).^2)/(2*sigma2*sigma2)) ./(sigma2*((2*pi)^(0.5)));
+plot(dd,normal_curve,<span class="string">'lineWidth'</span>,2)
+hold <span class="string">on</span>
+data2=score_test;
+<span class="comment">%dd2=sort(data2)</span>
+dd2=data2;
+<span class="keyword">for</span> i=1: size(dd2,1)
+    <span class="keyword">if</span>(mod(i,2)==0)
+    x=dd2(i);
+    normal_curve2=exp(-((x-mu2).^2)/(2*sigma2*sigma2)) ./(sigma2*((2*pi)^(0.5)));
+    plot(dd2(i),normal_curve2,<span class="string">'*'</span>)
+    hold <span class="string">on</span>;
+    <span class="keyword">end</span>
+    <span class="keyword">if</span>(mod(i,2)==1)
+    x=dd2(i);
+    normal_curve2=exp(-((x-mu2).^2)/(2*sigma2*sigma2)) ./(sigma2*((2*pi)^(0.5)));
+    plot(dd2(i),normal_curve2,<span class="string">'o'</span>)
+    hold <span class="string">on</span>;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+legend(<span class="string">'all the data'</span>, <span class="string">'image 1'</span>,<span class="string">'image 2'</span>,<span class="string">'image 3'</span>,<span class="string">'image 4'</span>,<span class="string">'image 5'</span>,<span class="string">'image 6'</span>,<span class="string">'image 7'</span>,<span class="string">'image 8'</span>,<span class="string">'image 9'</span>)
+xlabel(<span class="string">'Data points'</span>);
+ylabel(<span class="string">'pdf value'</span>);
+title(<span class="string">'Fitting normal distribution'</span>);
+</pre><pre class="codeoutput">
+mu2 =
+
+    0.8115
+
+
+sigma2 =
+
+    0.4172
+
+
+min1 =
+
+  -8.0419e-04
+
+
+max1 =
+
+    3.1837
+
+</pre><img vspace="5" hspace="5" src="mymainvap_03.png" alt=""> <img vspace="5" hspace="5" src="mymainvap_04.png" alt=""> <p>Image 4 and Image 9 have higher values. After seeing these images from the plot given below we can observe that these images are very sharp. Gradient is high for these two images. We can even set differeny criteria for commenting about the naturalness of the data.</p><p>There is a range between these images are natural and above and below this range the images are sharp or blured. Again the concept of naturalness is relative term.</p><h2>Problem 2(a)<a name="13"></a></h2><p>(contd.)  Since the resulting pdf is derived from a set of natural images, it can be used to evaluate the likelihood of how natural a new test image is.</p><h2>2.1.a<a name="14"></a></h2><p>as the pdf value at a point does not give probability, how can we make relative comparisons from the pdf? (hint: think in terms of similarity between pdf and histogram) Answer :</p><h2>2.1.b<a name="15"></a></h2><p>Based on your answer to the previous part, evaluate the resulting pdf at 9 values provided in &acirc;&#8364;&#732;score_test&acirc;&#8364;&#8482;. Note that these 9 values correspond to the provided images img1, img2,&acirc;&#8364;&brvbar;img9 respectively.  Does the output from the modeled pdf agree with subjective (human) opinion of naturalness of the given 9 test images? Justify your answer.</p><h2>2.2<a name="16"></a></h2><pre>Now assume that the given data follows a Rayleigh distribution .
+In this case,     represents the scale parameter which is estimated from the data. For the given problem sigma=0.6451 .</pre><p>Answer 2.2</p><pre class="codeinput">data(data&lt;0)
+<span class="comment">% only one values is negative and that too is very small ~ zero.</span>
+<span class="comment">% that's why we are taking absolute values</span>
+data=abs(data);
+
+figure;
+<span class="comment">%rayleigh</span>
+sigma2=0.6451;
+rayleigh_curve=(dd./(sigma2*sigma2)).*(exp(-(dd.*dd)./(2*sigma2*sigma2)));
+plot(dd,rayleigh_curve,<span class="string">'lineWidth'</span>,3)
+hold <span class="string">on</span>
+data2=score_test;
+dd2=data2;
+<span class="keyword">for</span> i=1: size(dd2,1)
+    <span class="keyword">if</span>(mod(i,2)==0)
+    x=dd2(i);
+    rayleigh_curve2=(x./(sigma2*sigma2)).*(exp(-(x.*x)./(2*sigma2*sigma2)));
+    plot(dd2(i),rayleigh_curve2,<span class="string">'*'</span>)
+    hold <span class="string">on</span>;
+    <span class="keyword">end</span>
+    <span class="keyword">if</span>(mod(i,2)==1)
+    x=dd2(i);
+    rayleigh_curve2=(x./(sigma2*sigma2)).*(exp(-(x.*x)./(2*sigma2*sigma2)));
+    plot(dd2(i),rayleigh_curve2,<span class="string">'o'</span>)
+    hold <span class="string">on</span>;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+legend(<span class="string">'all the data'</span>, <span class="string">'image 1'</span>,<span class="string">'image 2'</span>,<span class="string">'image 3'</span>,<span class="string">'image 4'</span>,<span class="string">'image 5'</span>,<span class="string">'image 6'</span>,<span class="string">'image 7'</span>,<span class="string">'image 8'</span>,<span class="string">'image 9'</span>)
+xlabel(<span class="string">'Data points'</span>);
+ylabel(<span class="string">'pdf value'</span>);
+title(<span class="string">'Fitting rayleigh distribution'</span>);
+</pre><pre class="codeoutput">
+ans =
+
+  -8.0419e-04
+
+</pre><img vspace="5" hspace="5" src="mymainvap_05.png" alt=""> <p>Image 4 and Image 9 have higher values. After seeing these images from the plot given below we can observe that these images are very sharp. Gradient is high for these two images.</p><p>visualizing the images</p><pre class="codeinput">figure;
+subplot(3,3,1)
+imshow(<span class="string">'img1.jpg'</span>)
+title(<span class="string">'image 1'</span>)
+subplot(3,3,2)
+imshow(<span class="string">'img2.jpg'</span>)
+title(<span class="string">'image 2'</span>)
+
+subplot(3,3,3)
+imshow(<span class="string">'img3.png'</span>)
+title(<span class="string">'image 3'</span>)
+
+subplot(3,3,4)
+imshow(<span class="string">'img4.png'</span>)
+title(<span class="string">'image 4'</span>)
+
+subplot(3,3,5)
+imshow(<span class="string">'img5.png'</span>)
+title(<span class="string">'image 5'</span>)
+
+subplot(3,3,6)
+imshow(<span class="string">'img6.png'</span>)
+title(<span class="string">'image 6'</span>)
+
+subplot(3,3,7)
+imshow(<span class="string">'img7.jpg'</span>)
+title(<span class="string">'image 7'</span>)
+
+subplot(3,3,8)
+imshow(<span class="string">'img8.jpg'</span>)
+title(<span class="string">'image 8'</span>)
+
+subplot(3,3,9)
+imshow(<span class="string">'img9.jpg'</span>)
+title(<span class="string">'image 9'</span>)
+</pre><img vspace="5" hspace="5" src="mymainvap_06.png" alt=""> <p>Here we can see all the images and can infer the naturalness of the images.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Lab3 - 201401222 - 201401409
+%%Problem 1
+% Load data_lab3.mat. ammonia_concentration provides the ammonia 
+% concentration values (in mg/L) from a water treatment plant during a certain period. 
+%%  Problem 1(a)
+% Suppose you are asked to assume that this data is normally distributed.
+% How will you confirm/reject this assumption using boxplots, histograms and 
+% estimated data statistics (mean, standard deviation etc.). 
+% You should explicitly list the features/aspects that you considered in order to arrive at your answer. 
+%%
+% Answer 1(a):
+% After plotting boxplot, histogram and calculating mean and standard deviation,
+% we've come to a conclusion that this data is approximately normally distributed.
+% Further details are given below the figures.
+
+close all;
+clear;
+load('data_lab3.mat');
+
+dataset=ammonia_concentration;
+% sorting the data for getting the values of Q1, Q2, Q3.
+sorted=sort(dataset);
+len=size(sorted,1);
+Q1d1=sorted(floor(len*0.25))
+Q2d1=sorted(floor(len*0.50))
+Q3d1=sorted(floor(len*0.75))
+myboxplot1=[min(dataset) Q1d1 Q2d1 Q3d1 max(dataset)];
+
+draw_data=[myboxplot1*20];
+draw_data=draw_data';
+
+n = size(draw_data, 2);
+unit = (1-1/(1+n))/(1+9/(4)) ;
+figure;    
+hold on;       
+for i = 1:n
+    arr = draw_data(:,i);
+    plot([i-unit, i+unit], [arr(5), arr(5)], 'LineWidth', 2);
+    plot([i-unit, i+unit], [arr(1), arr(1)], 'LineWidth', 2);
+    plot([i-unit, i+unit], [arr(3), arr(3)], 'LineWidth', 2);
+    plot([i, i], [arr(5), arr(4)], 'LineWidth', 2);
+    plot([i, i], [arr(2), arr(1)], 'LineWidth', 2);
+    plot([i-unit, i+unit, i+unit, i-unit, i-unit], [arr(2), arr(2), arr(4), arr(4), arr(2)], 'LineWidth', 2);
+end
+diff=max(max(draw_data))- min(min(draw_data));
+%For representing the data nicely
+ylim([min(min(draw_data))-(diff)/10  max(max(draw_data))+diff/10]);
+
+ylabel('Values')
+
+title('BoxPlot of the ammonia concentration')
+xlim([0 2.5])
+str=strcat('Amm. con. Mean= ',num2str(mean(dataset)));
+text(1.2,800,str)
+str=strcat('Amm. con. Sigma= ',num2str(std(dataset)));
+text(1.2,1000,str)
+%%
+% We can't say much from the boxplot. But if we have access to the boxplot only, we
+% can say that the median is in the middle of the box. The data is not skewed. Maxima and minima are approximately at 
+% equal distance with the median.
+% Just from the mean and standard deviation we can say that the standard deviation is small in comparision withe magnitude of the mean. 
+% So, the data is densely distributed. Again this can be wrong, depending on the data.
+% The data can be normally distributed. But it is just a simple observation. It can be wrong. We can make more inferences once we plot the histogram of the data.
+
+%%
+% Histogram code
+data=ammonia_concentration;
+bins=50;
+histArr=zeros(1,bins);
+min1=min(min(data));
+max1=max(max(data));
+diff=(max1-min1)/bins;
+values=min1+diff/2:diff:max1-diff/2;
+for i=1:size(data,1)
+    for j=1:bins
+        if(data(i,1)>=min1+(j-1)*diff & data(i,1) < min1+j*diff)
+            histArr(j) =histArr(j) + 1; 
+            break;
+        end
+    end
+end
+figure;
+bar(values,histArr);
+mu=mean(data);
+sigma=std(data);
+xlabel('Data points');
+ylabel('Frequency of the observers');
+str=strcat('Histogram of the ammonia concentration   binsize=(',int2str(bins),')');
+title(str);
+
+%%
+% After observing histogram, we can get more insight in the data. The data looks like it is normally distributed.
+
+
+%% Problem 1(B)
+% Notwithstanding your answer in the previous part, assuming that the data is normally distributed, 
+% estimate the probability that ammonia concentration is greater than 40 mg/L in two cases: 
+% (a) using only the data provided (i.e.not 
+% computing any statistics from given data), (b) by using estimated statistics from the data.
+% Does the answer in the two cases agree, yes or no? Provide reason(s) for your choice.
+
+%% 
+% Answer:1(B)
+% (a) : Using the data only we've got 0.34 probability
+% (b) : Using the stastical normal distribution table we've got 0.33 probability. 
+% So, we can say that the data is indeed following normal distribution closely. We do not have normal cumulative function in the matlab, so we found the values
+% of the probability using the normal distribution table.
+
+data=ammonia_concentration;
+gt_40=sum(data>40);
+per_40_using_the_data_only=gt_40/size(data,1)
+
+% referring from the normal distribution table table 
+(40-mu)/sigma
+1-0.67
+
+
+%% Problem 2
+%Load data_lab3.mat. score_natural_model is a 9968-deimensional vector 
+% in which each element quantifies natural images. The goal of 
+% this experiment is to use this data to model mathematically 
+% the underlying probability distribution, and draw inferences from the resulting model.  
+%% Problem 2(a) 
+% Assuming  that the data in â€˜score_natural_modelâ€™  is normally distributed, 
+% obtain the corresponding normal distribution curve.  
+data=score_natural_model;
+
+mu2=mean(data)
+sigma2=std(data)
+histogram(data);
+xlabel('score natural');
+ylabel('frequency');
+title('Histogram of score natural model');
+
+dd=sort(data);
+min1=min(min(data))
+max1=max(max(data))
+figure
+normal_curve=exp(-((dd-mu2).^2)/(2*sigma2*sigma2)) ./(sigma2*((2*pi)^(0.5)));
+plot(dd,normal_curve,'lineWidth',2)
+hold on
+data2=score_test;
+%dd2=sort(data2)
+dd2=data2;
+for i=1: size(dd2,1)
+    if(mod(i,2)==0)
+    x=dd2(i);
+    normal_curve2=exp(-((x-mu2).^2)/(2*sigma2*sigma2)) ./(sigma2*((2*pi)^(0.5)));
+    plot(dd2(i),normal_curve2,'*')
+    hold on;    
+    end
+    if(mod(i,2)==1)
+    x=dd2(i);
+    normal_curve2=exp(-((x-mu2).^2)/(2*sigma2*sigma2)) ./(sigma2*((2*pi)^(0.5)));
+    plot(dd2(i),normal_curve2,'o')
+    hold on;    
+    end
+end
+
+legend('all the data', 'image 1','image 2','image 3','image 4','image 5','image 6','image 7','image 8','image 9')
+xlabel('Data points');
+ylabel('pdf value');
+title('Fitting normal distribution');
+%% 
+% Image 4 and Image 9 have higher values. 
+% After seeing these images from the plot given below we can observe that
+% these images are very sharp.
+% Gradient is high for these two images.
+% We can even set differeny criteria for commenting about the naturalness
+% of the data.
+%%
+% There is a range between these images are natural and above and below
+% this range the images are sharp or blured. 
+% Again the concept of naturalness is relative term.
+%% Problem 2(a) 
+% (contd.)  Since the resulting pdf is derived from a set of natural images, 
+% it can be used to evaluate the likelihood of how natural a new test image is.  
+%% 2.1.a
+% as the pdf value at a point does not give probability, how can we 
+% make relative comparisons from the pdf? (hint: think in terms of similarity between pdf and histogram) 
+% Answer :
+%% 2.1.b
+% Based on your answer to the previous part, evaluate the resulting pdf at 9 values provided in 
+% â€˜score_testâ€™. Note that these 9 values correspond to the provided images img1, img2,â€¦img9 respectively.  Does the output from the 
+% modeled pdf agree with subjective (human) opinion of naturalness of the given 9 test images? Justify your answer.
+%% 2.2
+%  Now assume that the given data follows a Rayleigh distribution .
+% In this case,     represents the scale parameter which is estimated from the data. For the given problem sigma=0.6451 .
+
+%% 
+% Answer 2.2
+% 
+
+data(data<0)
+% only one values is negative and that too is very small ~ zero.
+% that's why we are taking absolute values
+data=abs(data);
+
+figure;
+%rayleigh
+sigma2=0.6451;
+rayleigh_curve=(dd./(sigma2*sigma2)).*(exp(-(dd.*dd)./(2*sigma2*sigma2)));
+plot(dd,rayleigh_curve,'lineWidth',3)
+hold on
+data2=score_test;
+dd2=data2;
+for i=1: size(dd2,1)
+    if(mod(i,2)==0)
+    x=dd2(i);
+    rayleigh_curve2=(x./(sigma2*sigma2)).*(exp(-(x.*x)./(2*sigma2*sigma2)));
+    plot(dd2(i),rayleigh_curve2,'*')
+    hold on;    
+    end
+    if(mod(i,2)==1)
+    x=dd2(i);
+    rayleigh_curve2=(x./(sigma2*sigma2)).*(exp(-(x.*x)./(2*sigma2*sigma2)));
+    plot(dd2(i),rayleigh_curve2,'o')
+    hold on;    
+    end
+end
+legend('all the data', 'image 1','image 2','image 3','image 4','image 5','image 6','image 7','image 8','image 9')
+xlabel('Data points');
+ylabel('pdf value');
+title('Fitting rayleigh distribution');
+%% 
+% Image 4 and Image 9 have higher values. 
+% After seeing these images from the plot given below we can observe that
+% these images are very sharp.
+% Gradient is high for these two images.
+
+%% 
+% visualizing the images
+figure;
+subplot(3,3,1)
+imshow('img1.jpg')
+title('image 1')
+subplot(3,3,2)
+imshow('img2.jpg')
+title('image 2')
+
+subplot(3,3,3)
+imshow('img3.png')
+title('image 3')
+
+subplot(3,3,4)
+imshow('img4.png')
+title('image 4')
+
+subplot(3,3,5)
+imshow('img5.png')
+title('image 5')
+
+subplot(3,3,6)
+imshow('img6.png')
+title('image 6')
+
+subplot(3,3,7)
+imshow('img7.jpg')
+title('image 7')
+
+subplot(3,3,8)
+imshow('img8.jpg')
+title('image 8')
+
+subplot(3,3,9)
+imshow('img9.jpg')
+title('image 9')
+%%
+% Here we can see all the images and can infer the naturalness of the
+% images.
+
+
+
+
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,58 @@
+close all;
+clear;
+load('data_lab7.mat')
+arr1=psnr1;
+arr2=psnr2;
+
+
+
+mean1=mean(arr1);
+mean2=mean(arr2);
+
+s1=std(arr1);
+s2=std(arr2);
+
+n1=size(arr1,1);
+n2=size(arr2,1);
+
+tval1=2.571;
+tval2=tval1;
+
+cimin1=mean1-(s1*tval1)/(n1^(0.5));
+cimin2=mean2-(s2*tval2)/(n2^(0.5));
+
+cimax1=mean1+(s1*tval1)/(n1^(0.5));
+cimax2=mean2+(s2*tval2)/(n2^(0.5));
+
+
+
+CI1 = [cimin1 cimax1];
+CI2 = [cimin2 cimax2];
+
+
+
+figure;
+plot([1 2],[CI1(1) CI1(1)],'lineWidth',2)
+hold on
+plot([1 2],[CI1(2) CI1(2)],'lineWidth',2)
+hold on
+plot([1.5 1.5], CI1,'lineWidth',2)
+hold on
+plot([3 4],[CI2(1) CI2(1)],'lineWidth',2)
+hold on
+plot([3 4],[CI2(2) CI2(2)],'lineWidth',2)
+hold on
+plot([3.5 3.5], CI2,'lineWidth',2)
+xlabel('data1                            data2')
+ylabel('confidence interval')
+title('confidence interval for two dataset')
+
+av1=[CI1 CI2];
+ylim([min(av1)-0.5 max(av1)+0.5])
+xlim([0 5])
+
+
+
+
+
+

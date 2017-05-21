@@ -1,0 +1,369 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>mymain</title><meta name="generator" content="MATLAB 8.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-01-17"><meta name="DC.source" content="mymain.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Load data_lab2.mat. &#8216;ACR&#8217; and &#8216;SAMVIQ&#8217; are the averaged subjective quality scores from 28 and 39 observers respectively.A total of 192 videos were rated.</a></li></ul></div><pre class="codeinput">close <span class="string">all</span>;
+clear;
+</pre><h2>Load data_lab2.mat. &#8216;ACR&#8217; and &#8216;SAMVIQ&#8217; are the averaged subjective quality scores from 28 and 39 observers respectively.A total of 192 videos were rated.<a name="2"></a></h2><p>(A)Compare the quality scores from ACR and SAMVIQ methodologies by creating box plots (do not use the boxplot command but instead create your own function). Which of the two exhibits higher variability around the median? Justify your answer (hint: think of the qualitative differences between the two methods, and also the fact that different number of observers were used for each method).</p><pre class="codeinput">load(<span class="string">'data_lab2.mat'</span>);
+dataset=ACR;
+sorted=sort(dataset);
+
+len=size(sorted,1);
+Q1d1=sorted(floor(len*0.25))
+Q2d1=sorted(floor(len*0.50))
+Q3d1=sorted(floor(len*0.75))
+myboxplot1=[min(dataset) Q1d1 Q2d1 Q3d1 max(dataset)];
+
+
+dataset=SAMVIQ;
+sorted=sort(dataset);
+
+len=size(sorted,1);
+Q1d2=sorted(floor(len*0.25))
+Q2d2=sorted(floor(len*0.50))
+Q3d2=sorted(floor(len*0.75))
+myboxplot2=[min(dataset) Q1d2 Q2d2 Q3d2 max(dataset)];
+
+draw_data=[myboxplot1*20; myboxplot2];
+draw_data=draw_data';
+lineWidth=1;
+width=1;
+
+n = size(draw_data, 2);
+unit = (1-1/(1+n))/(1+9/(width+3));
+
+figure;
+hold <span class="string">on</span>;
+<span class="keyword">for</span> i = 1:n
+    v = draw_data(:,i);
+    <span class="comment">% draw the min line</span>
+    plot([i-unit, i+unit], [v(5), v(5)], <span class="string">'LineWidth'</span>, lineWidth);
+    <span class="comment">% draw the max line</span>
+    plot([i-unit, i+unit], [v(1), v(1)], <span class="string">'LineWidth'</span>, lineWidth);
+    <span class="comment">% draw middle line</span>
+    plot([i-unit, i+unit], [v(3), v(3)], <span class="string">'LineWidth'</span>, lineWidth);
+    <span class="comment">% draw vertical line</span>
+    plot([i, i], [v(5), v(4)], <span class="string">'LineWidth'</span>, lineWidth);
+    plot([i, i], [v(2), v(1)], <span class="string">'LineWidth'</span>, lineWidth);
+    <span class="comment">% draw box</span>
+    plot([i-unit, i+unit, i+unit, i-unit, i-unit], [v(2), v(2), v(4), v(4), v(2)], <span class="string">'LineWidth'</span>, lineWidth);
+<span class="keyword">end</span>;
+diff=max(max(draw_data))- min(min(draw_data));
+ylim([min(min(draw_data))-(diff)/10  max(max(draw_data))+diff/10]);
+title(<span class="string">'BoxPlot of the ACR and the SAMVIQ dataset (ACR is scaled)'</span>)
+figure;
+</pre><pre class="codeoutput">
+Q1d1 =
+
+    2.9259
+
+
+Q2d1 =
+
+    3.8148
+
+
+Q3d1 =
+
+    4.1852
+
+
+Q1d2 =
+
+   37.5294
+
+
+Q2d2 =
+
+   54.3333
+
+
+Q3d2 =
+
+   67.3333
+
+</pre><img vspace="5" hspace="5" src="mymain_01.png" alt=""> <img vspace="5" hspace="5" src="mymain_02.png" alt=""> <pre class="codeinput"><span class="comment">%Which of the two, ACR or SAMVIQ, leads to mathematical outliers</span>
+<span class="comment">% (assume points beyond Q3 + w*IQR or Q1 - w*IQR with w = 1.5,</span>
+<span class="comment">% as mathematical outliers)? Any reason(s)?</span>
+
+IQR1=Q3d1-Q1d1
+w=1.5;
+
+outliers_left1= (ACR&lt;= Q1d1 -w*IQR1);
+outliers_right1=(ACR &gt;= Q3d1 + w*IQR1);
+outliers1=(outliers_left1 | outliers_right1);
+outliers_data1=zeros(size(ACR));
+<span class="keyword">for</span> i=1:size(ACR,1)
+    <span class="keyword">if</span>(outliers1(i)==1)
+        outliers_data1(i)=ACR(i);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+stem(ACR)
+hold <span class="string">on</span>
+stem(outliers_data1,<span class="string">'ro'</span>)
+legend(<span class="string">'Normal data'</span>,<span class="string">'Outliers'</span>)
+diff=max(max(ACR)) -min(min(ACR));
+ylim([min(min(ACR)) max(max(ACR))+diff/8 ])
+title(<span class="string">'Outlier Analysis ACR'</span>)
+figure
+
+IQR2=Q3d2-Q1d2
+w=1.5;
+
+outliers_left2= (SAMVIQ&lt;= Q1d2 -w*IQR2);
+outliers_right2=(SAMVIQ &gt;= Q3d2 + w*IQR2);
+outliers2=(outliers_left2 | outliers_right2);
+outliers_data2=zeros(size(SAMVIQ));
+<span class="keyword">for</span> i=1:size(SAMVIQ,1)
+    <span class="keyword">if</span>(outliers2(i)==1)
+        outliers_data2(i)=SAMVIQ(i);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+stem(SAMVIQ)
+hold <span class="string">on</span>
+stem(outliers_data2,<span class="string">'ro'</span>)
+legend(<span class="string">'Normal data'</span>,<span class="string">'Outliers'</span>)
+diff=max(max(SAMVIQ)) -min(min(SAMVIQ));
+ylim([min(min(SAMVIQ)) max(max(SAMVIQ))+diff/8 ])
+title(<span class="string">'Outlier Analysis SAM'</span>)
+figure
+</pre><pre class="codeoutput">
+IQR1 =
+
+    1.2593
+
+
+IQR2 =
+
+   29.8039
+
+</pre><img vspace="5" hspace="5" src="mymain_03.png" alt=""> <img vspace="5" hspace="5" src="mymain_04.png" alt=""> <img vspace="5" hspace="5" src="mymain_05.png" alt=""> <pre class="codeinput">bins=10;
+histogram(ACR,bins)
+xlabel(<span class="string">'Video Quality (higher is better)'</span>)
+ylabel(<span class="string">'Frequency of the observers'</span>)
+str=strcat(<span class="string">'Histogram of the absolute category rating method   binsize=('</span>,int2str(bins),<span class="string">')'</span>);
+title(str)
+figure
+
+
+bins=20;
+histogram(SAMVIQ,bins)
+xlabel(<span class="string">'Video Quality (higher is better)'</span>)
+ylabel(<span class="string">'Frequency of the observers'</span>)
+str=strcat(<span class="string">'Histogram of the Subjective Assessment Methodology method   binsize=('</span>,int2str(bins),<span class="string">')'</span>);
+title(str)
+</pre><img vspace="5" hspace="5" src="mymain_06.png" alt=""> <img vspace="5" hspace="5" src="mymain_07.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% 
+close all;
+clear;
+%% Load data_lab2.mat. ‘ACR’ and ‘SAMVIQ’ are the averaged subjective quality scores from 28 and 39 observers respectively.A total of 192 videos were rated. 
+% (A)Compare the quality scores from ACR and SAMVIQ methodologies by creating box plots 
+% (do not use the boxplot command but instead create your own function). 
+% Which of the two exhibits higher variability around the median? 
+% Justify your answer (hint: think of the qualitative differences between the two methods, 
+% and also the fact that different number of observers were used for each
+% method).
+%% 
+
+load('data_lab2.mat');
+dataset=ACR;
+sorted=sort(dataset);
+
+len=size(sorted,1);
+Q1d1=sorted(floor(len*0.25))
+Q2d1=sorted(floor(len*0.50))
+Q3d1=sorted(floor(len*0.75))
+myboxplot1=[min(dataset) Q1d1 Q2d1 Q3d1 max(dataset)];
+
+
+dataset=SAMVIQ;
+sorted=sort(dataset);
+
+len=size(sorted,1);
+Q1d2=sorted(floor(len*0.25))
+Q2d2=sorted(floor(len*0.50))
+Q3d2=sorted(floor(len*0.75))
+myboxplot2=[min(dataset) Q1d2 Q2d2 Q3d2 max(dataset)];
+
+draw_data=[myboxplot1*20; myboxplot2];
+draw_data=draw_data';
+lineWidth=1;
+width=1;
+
+n = size(draw_data, 2);
+unit = (1-1/(1+n))/(1+9/(width+3));
+
+figure;    
+hold on;       
+for i = 1:n
+    v = draw_data(:,i);
+    % draw the min line
+    plot([i-unit, i+unit], [v(5), v(5)], 'LineWidth', lineWidth);
+    % draw the max line
+    plot([i-unit, i+unit], [v(1), v(1)], 'LineWidth', lineWidth);
+    % draw middle line
+    plot([i-unit, i+unit], [v(3), v(3)], 'LineWidth', lineWidth);
+    % draw vertical line
+    plot([i, i], [v(5), v(4)], 'LineWidth', lineWidth);
+    plot([i, i], [v(2), v(1)], 'LineWidth', lineWidth);
+    % draw box
+    plot([i-unit, i+unit, i+unit, i-unit, i-unit], [v(2), v(2), v(4), v(4), v(2)], 'LineWidth', lineWidth);
+end;
+diff=max(max(draw_data))- min(min(draw_data));
+ylim([min(min(draw_data))-(diff)/10  max(max(draw_data))+diff/10]);
+title('BoxPlot of the ACR and the SAMVIQ dataset (ACR is scaled)')
+figure;
+
+
+%% 
+%Which of the two, ACR or SAMVIQ, leads to mathematical outliers 
+% (assume points beyond Q3 + w*IQR or Q1 - w*IQR with w = 1.5, 
+% as mathematical outliers)? Any reason(s)? 
+
+IQR1=Q3d1-Q1d1
+w=1.5;
+
+outliers_left1= (ACR<= Q1d1 -w*IQR1);
+outliers_right1=(ACR >= Q3d1 + w*IQR1);
+outliers1=(outliers_left1 | outliers_right1);
+outliers_data1=zeros(size(ACR));
+for i=1:size(ACR,1)
+    if(outliers1(i)==1)
+        outliers_data1(i)=ACR(i);
+    end
+end
+stem(ACR)
+hold on
+stem(outliers_data1,'ro')
+legend('Normal data','Outliers')
+diff=max(max(ACR)) -min(min(ACR));
+ylim([min(min(ACR)) max(max(ACR))+diff/8 ])
+title('Outlier Analysis ACR')
+figure
+
+IQR2=Q3d2-Q1d2
+w=1.5;
+
+outliers_left2= (SAMVIQ<= Q1d2 -w*IQR2);
+outliers_right2=(SAMVIQ >= Q3d2 + w*IQR2);
+outliers2=(outliers_left2 | outliers_right2);
+outliers_data2=zeros(size(SAMVIQ));
+for i=1:size(SAMVIQ,1)
+    if(outliers2(i)==1)
+        outliers_data2(i)=SAMVIQ(i);
+    end
+end
+stem(SAMVIQ)
+hold on
+stem(outliers_data2,'ro')
+legend('Normal data','Outliers')
+diff=max(max(SAMVIQ)) -min(min(SAMVIQ));
+ylim([min(min(SAMVIQ)) max(max(SAMVIQ))+diff/8 ])
+title('Outlier Analysis SAM')
+figure
+
+
+
+%%
+
+bins=10;
+histogram(ACR,bins)
+xlabel('Video Quality (higher is better)')
+ylabel('Frequency of the observers')
+str=strcat('Histogram of the absolute category rating method   binsize=(',int2str(bins),')');
+title(str)
+figure
+
+
+bins=20;
+histogram(SAMVIQ,bins)
+xlabel('Video Quality (higher is better)')
+ylabel('Frequency of the observers')
+str=strcat('Histogram of the Subjective Assessment Methodology method   binsize=(',int2str(bins),')');
+title(str)
+
+
+
+%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##### SOURCE END #####
+--></body></html>
